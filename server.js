@@ -1,5 +1,5 @@
 const express = require('express')
-const proxy = require('express-http-proxy')
+const proxy = require('http-proxy-middleware')
 const webpack = require('webpack')
 const config = require('./webpack.config')
 const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -17,7 +17,12 @@ app.use(webpackHotMiddleware(compiler, {
   log: console.log
 }))
 
-app.use('/api', proxy('localhost:3000'))
+app.use('/api', proxy({
+  target: 'http://localhost:3000',
+  changeOrigin: true,
+  ws: true,
+  pathRewrite: {'^/api': '/'}
+}))
 
 app.use(express.static(`${__dirname}/static`))
 
