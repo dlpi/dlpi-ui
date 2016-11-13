@@ -26,6 +26,8 @@ app.use('/api', proxy({
 
 app.use(express.static(`${__dirname}/static`))
 
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/static/index.html`))
+
 let server = app.listen(8080, () => {
   let host = server.address().address
   let port = server.address().port
