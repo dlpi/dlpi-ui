@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
+import RaisedButton from 'material-ui/RaisedButton'
 import request from 'superagent'
 
 export default class HelloWorld extends Component {
@@ -7,9 +8,10 @@ export default class HelloWorld extends Component {
     const {setGreeting} = this.props
     return (
       <div className='helloworld'>
-          {this.props.greeting}
-          <button onClick={() => setGreeting('Hello Universe')} >Change</button>
+          <p>{this.props.greeting}</p>
           <br />
+          <RaisedButton onClick={() => setGreeting('Hello Universe')} label='Change' />
+          <br /><br />
           <Dropzone onDrop={this.onDrop}>
             <div>Try dropping some files here, or click to select files to upload.</div>
           </Dropzone>
